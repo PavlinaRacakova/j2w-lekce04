@@ -9,36 +9,32 @@
 <div class="container">
     [#include '/_common/header.ftlh']
 
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col"></th>
-            <th scope="col">Jméno</th>
-            <th scope="col">Příjmení</th>
-            <th scope="col">Bydliště</th>
-            <th scope="col"></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>1</td>
-            <td><i class="las la-mars" style="color: blue;"></i></td>
-            <td>Medvídek</td>
-            <td>Pú</td>
-            <td>Stokorcový les</td>
-            <td><a href="/ucastnici/detail/1" class="btn btn-primary">Detail</a></td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td><i class="las la-venus" style="color: red;"></i></td>
-            <td>Čarodějnice</td>
-            <td>Malá</td>
-            <td><em>neuvedeno</em></td>
-            <td><a href="/ucastnici/detail/2" class="btn btn-primary">Detail</a></td>
-        </tr>
-        </tbody>
-    </table>
+    [#list ucastnici]
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Jméno a příjmení</th>
+                <th scope="col">Bydliště</th>
+                <th scope="col">Foto</th>
+            </tr>
+            </thead>
+            <tbody>
+            [#items as ucastnik]
+                <tr>
+                    <td>${ucastnik?counter}</td>
+                    <td>${ucastnik.jmeno()} ${ucastnik.prijmeni()}</td>
+                    <td>${ucastnik.bydliste()}</td>
+                    <td><a href="/ucastnici/detail/${ucastnik?index}" class="btn btn-primary">Foto</a></td>
+                </tr>
+            [/#items]
+            </tbody>
+        </table>
+    [#else]
+        <div>
+            <em>Seznam účastníků je prázdný.</em>
+        </div>
+    [/#list]
 </div>
 </body>
 </html>
